@@ -45,7 +45,7 @@
         </Menu>
 
         <StackPanel>
-            <!-- Place here your content -->
+            <Image Name="image1" Stretch="Fill" Initialized="image1_Initialized"/>
         </StackPanel>
     </DockPanel>
 </Window>
