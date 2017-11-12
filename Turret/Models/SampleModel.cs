@@ -8,5 +8,6 @@ namespace Turret.Models
 {
     class SampleModel
     {
+
     }
 }

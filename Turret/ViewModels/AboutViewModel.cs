@@ -17,7 +17,6 @@ namespace Turret.ViewModels
             {
                 return "Turret" + Environment.NewLine +
                         "Created by Bowmer" + Environment.NewLine +
-                        "Address" + Environment.NewLine +
                         "2017";
             }
         }

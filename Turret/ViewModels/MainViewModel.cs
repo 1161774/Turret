@@ -14,6 +14,10 @@ using System.Windows.Input;
 using System.Xml.Linq;
 using Turret.Views;
 using Turret.Utils;
+using Turret.Camera;
+using Emgu.CV;
+using Emgu.CV.CvEnum;
+using Emgu.CV.Structure;
 
 namespace Turret.ViewModels
 {
@@ -31,11 +35,22 @@ namespace Turret.ViewModels
         }
         #endregion
 
-        #region Constructors
-        public MainViewModel()
+        public Mat MainWindow
+        {
+            get
+            {
+                Mat image = new Mat(100, 400, DepthType.Cv8U, 3);
+                image.SetTo(new Bgr(255, 255, 255).MCvScalar);
+                CvInvoke.PutText(image, "Hello, World", new System.Drawing.Point(10, 50), FontFace.HersheyPlain, 3.0, new Bgr(255, 0, 0).MCvScalar);
+                return image;
+            }
+        }
+
+    #region Constructors
+    public MainViewModel()
         {
             // DialogService is used to handle dialogs
-            this.DialogService = new MvvmDialogs.DialogService();
+            this.DialogService = new DialogService();
         }
 
         #endregion
@@ -49,8 +64,7 @@ namespace Turret.ViewModels
 
         public ICommand SaveAsCmd { get { return new RelayCommand(OnSaveAsTest, AlwaysFalse); } }
         public ICommand SaveCmd { get { return new RelayCommand(OnSaveTest, AlwaysFalse); } }
-        public ICommand NewCmd { get { return new RelayCommand(OnNewTest, AlwaysFalse); } }
-        public ICommand OpenCmd { get { return new RelayCommand(OnOpenTest, AlwaysFalse); } }
+        public ICommand OpenCmd { get { return new RelayCommand(OnOpenTest, AlwaysTrue); } }
         public ICommand ShowAboutDialogCmd { get { return new RelayCommand(OnShowAboutDialog, AlwaysTrue); } }
         public ICommand ExitCmd { get { return new RelayCommand(OnExitApp, AlwaysTrue); } }
 
@@ -83,25 +97,17 @@ namespace Turret.ViewModels
         {
             // TODO
         }
-        private void OnNewTest()
-        {
-            // TODO
-        }
         private void OnOpenTest()
         {
-            var settings = new OpenFileDialogSettings
-            {
-                Title = "Open",
-                Filter = "Sample (.xml)|*.xml",
-                CheckFileExists = false
-            };
+            var cb = new CameraBase();
+            var cameras = cb.GetCameras();
 
-            bool? success = DialogService.ShowOpenFileDialog(this, settings);
-            if (success == true)
+            foreach(var c in cameras)
             {
-                // Do something
-                Log.Info("Opening file: " + settings.FileName);
+
             }
+
+
         }
         private void OnShowAboutDialog()
         {

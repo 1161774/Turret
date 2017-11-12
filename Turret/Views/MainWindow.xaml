@@ -9,6 +9,7 @@
         xmlns:localModels="clr-namespace:Turret.Models"
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         xmlns:md="https://github.com/fantasticfiasco/mvvm-dialogs"
+        xmlns:wpf="clr-namespace:Emgu.CV.WPF"
         md:DialogServiceViews.IsRegistered="True"
         mc:Ignorable="d"
         Title="{Binding Title}" Height="350" Width="525"
@@ -19,14 +20,14 @@
         <DataTemplate x:Key="SampleTemplate">
             <StackPanel/>
         </DataTemplate>
-        
+        <wpf:MatToImageConverter x:Key="MatToImageConverter" />
+
     </Window.Resources>
     <Window.InputBindings>
         <!-- Example of Keyboard shortcuts -->
         <KeyBinding Command="{Binding SaveCmd}" Key="S" Modifiers="Ctrl" />
         <KeyBinding Command="{Binding SaveAsCmd}" Gesture="Ctrl+Shift+S" />
         <KeyBinding Command="{Binding OpenCmd}" Gesture="Ctrl+O" />
-        <KeyBinding Command="{Binding NewCmd}" Gesture="Ctrl+N" />
         <KeyBinding Command="{Binding ExitCmd}" Gesture="Alt+F4" />
     </Window.InputBindings>
 
@@ -34,7 +35,6 @@
         <!-- File Menu -->
         <Menu DockPanel.Dock="Top" Margin="0,0,0.4,0">
             <MenuItem Header="File">
-                <MenuItem Header="New" Command="{Binding NewCmd}" InputGestureText="Ctrl+N" />
                 <MenuItem Header="Open" Command="{Binding OpenCmd}" InputGestureText="Ctrl+O" />
                 <MenuItem Header="Save" Command="{Binding SaveCmd}" InputGestureText="Ctrl+S" />
                 <MenuItem Header="Save As" Command="{Binding SaveAsCmd}" InputGestureText="Ctrl+Shift+S"/>
@@ -44,8 +44,10 @@
             <MenuItem Header="About" Command="{Binding ShowAboutDialogCmd}"/>
         </Menu>
 
-        <StackPanel>
-            <Image Name="image1" Stretch="Fill" Initialized="image1_Initialized"/>
-        </StackPanel>
+        <ScrollViewer >
+            <StackPanel>
+                <Image Name="image1" Stretch="Fill" Source="{Binding MainWindow, Converter={StaticResource MatToImageConverter}}"/>
+            </StackPanel>
+        </ScrollViewer>
     </DockPanel>
 </Window>
