@@ -13,7 +13,7 @@ using Emgu.CV.CvEnum;
 using System.Windows.Data;
 using System.Globalization;
 
-namespace Emgu.CV.WPF
+namespace Turret.Converters
 {
 
    public class MatToImageConverter : IValueConverter

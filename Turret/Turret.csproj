@@ -123,6 +123,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\DisplayCameras.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -131,7 +135,8 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Models\Camera.cs" />
+    <Compile Include="Models\CameraModel.cs" />
+    <Compile Include="ViewModels\DisplayCamerasViewModel.cs" />
     <Compile Include="Views\Converters\BitmapSourceConverter.cs" />
     <Compile Include="Models\SampleModel.cs" />
     <Compile Include="Utils\RelayCommand.cs" />
@@ -140,6 +145,9 @@
     <Compile Include="ViewModels\ViewModelBase.cs" />
     <Compile Include="Views\About.xaml.cs">
       <DependentUpon>About.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\DisplayCameras.xaml.cs">
+      <DependentUpon>DisplayCameras.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>

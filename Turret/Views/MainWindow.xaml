@@ -9,7 +9,7 @@
         xmlns:localModels="clr-namespace:Turret.Models"
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         xmlns:md="https://github.com/fantasticfiasco/mvvm-dialogs"
-        xmlns:wpf="clr-namespace:Emgu.CV.WPF"
+        xmlns:converter="clr-namespace:Turret.Converters"
         md:DialogServiceViews.IsRegistered="True"
         mc:Ignorable="d"
         Title="{Binding Title}" Height="350" Width="525"
@@ -20,7 +20,7 @@
         <DataTemplate x:Key="SampleTemplate">
             <StackPanel/>
         </DataTemplate>
-        <wpf:MatToImageConverter x:Key="MatToImageConverter" />
+        <converter:MatToImageConverter x:Key="MatToImageConverter" />
 
     </Window.Resources>
     <Window.InputBindings>
@@ -46,7 +46,7 @@
 
         <ScrollViewer >
             <StackPanel>
-                <Image Name="image1" Stretch="Fill" Source="{Binding MainWindow, Converter={StaticResource MatToImageConverter}}"/>
+                <Image x:Name="image1" Stretch="Fill" Source="{Binding MainWindow, Converter={StaticResource MatToImageConverter}}"/>
             </StackPanel>
         </ScrollViewer>
     </DockPanel>

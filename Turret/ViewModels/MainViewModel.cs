@@ -14,10 +14,11 @@ using System.Windows.Input;
 using System.Xml.Linq;
 using Turret.Views;
 using Turret.Utils;
-using Turret.Camera;
+using Turret.CameraModel;
 using Emgu.CV;
 using Emgu.CV.CvEnum;
 using Emgu.CV.Structure;
+using System.Timers;
 
 namespace Turret.ViewModels
 {
@@ -35,22 +36,28 @@ namespace Turret.ViewModels
         }
         #endregion
 
-        public Mat MainWindow
-        {
-            get
-            {
-                Mat image = new Mat(100, 400, DepthType.Cv8U, 3);
-                image.SetTo(new Bgr(255, 255, 255).MCvScalar);
-                CvInvoke.PutText(image, "Hello, World", new System.Drawing.Point(10, 50), FontFace.HersheyPlain, 3.0, new Bgr(255, 0, 0).MCvScalar);
-                return image;
-            }
-        }
+        private Capture _capture;
+        private Timer t;
+
+        public Mat MainWindow;
 
     #region Constructors
     public MainViewModel()
         {
             // DialogService is used to handle dialogs
             this.DialogService = new DialogService();
+
+            _capture = new Capture();
+            t = new Timer(50);
+            t.Elapsed += T_Elapsed;
+            t.Start();
+
+        }
+
+        private void T_Elapsed(object sender, ElapsedEventArgs e)
+        {
+
+           // MainWindow = _capture.QueryFrame();
         }
 
         #endregion
@@ -99,14 +106,8 @@ namespace Turret.ViewModels
         }
         private void OnOpenTest()
         {
-            var cb = new CameraBase();
-            var cameras = cb.GetCameras();
-
-            foreach(var c in cameras)
-            {
-
-            }
-
+            var dialog = new DisplayCamerasViewModel();
+            var result = DialogService.ShowDialog<DisplayCameras>(this, dialog);
 
         }
         private void OnShowAboutDialog()
@@ -117,6 +118,9 @@ namespace Turret.ViewModels
         }
         private void OnExitApp()
         {
+            _capture.Stop();
+            _capture.Dispose();
+            t.Dispose();
             System.Windows.Application.Current.MainWindow.Close();
         }
         #endregion

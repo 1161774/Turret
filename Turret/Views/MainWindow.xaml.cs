@@ -29,6 +29,7 @@ namespace Turret.Views
             InitializeComponent();
             this.Closing += MainView_Closing;
         }
+        
 
         private void MainView_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
@@ -40,7 +41,9 @@ namespace Turret.Views
                     return;
                 }
             */
+            
             Log.Info("Closing App");
         }
+
     }
 }
