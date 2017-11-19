@@ -53,13 +53,13 @@ namespace Turret
                                                     + "\\Bowmer\\Turret\\log.txt";
 
             // Show a message before closing application
-            var dialogService = new MvvmDialogs.DialogService();
-            dialogService.ShowMessageBox((INotifyPropertyChanged)(app.DataContext),
-                "Oops, something went wrong and the application must close. Please find a " +
-                "report on the issue at: " + path + Environment.NewLine +
-                "If the problem persist, please contact Bowmer.",
-                "Unhandled Error",
-                MessageBoxButton.OK);
+            //var dialogService = new MvvmDialogs.DialogService();
+            //dialogService.ShowMessageBox((INotifyPropertyChanged)(app.DataContext),
+            //    "Oops, something went wrong and the application must close. Please find a " +
+            //    "report on the issue at: " + path + Environment.NewLine +
+            //    "If the problem persist, please contact Bowmer.",
+            //    "Unhandled Error",
+            //    MessageBoxButton.OK);
 
             Exception e = (Exception)args.ExceptionObject;
             Log.Fatal("Application has crashed", e);

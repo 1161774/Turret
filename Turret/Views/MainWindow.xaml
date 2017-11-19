@@ -46,7 +46,7 @@
 
         <ScrollViewer >
             <StackPanel>
-                <Image x:Name="image1" Stretch="Fill" Source="{Binding MainWindow, Converter={StaticResource MatToImageConverter}}"/>
+                <!--<Image x:Name="image1" Stretch="Fill" Source="{Binding MainWindow, Converter={StaticResource MatToImageConverter}}"/>-->
             </StackPanel>
         </ScrollViewer>
     </DockPanel>

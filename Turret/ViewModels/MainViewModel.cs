@@ -36,28 +36,11 @@ namespace Turret.ViewModels
         }
         #endregion
 
-        private Capture _capture;
-        private Timer t;
-
-        public Mat MainWindow;
-
     #region Constructors
     public MainViewModel()
         {
             // DialogService is used to handle dialogs
             this.DialogService = new DialogService();
-
-            _capture = new Capture();
-            t = new Timer(50);
-            t.Elapsed += T_Elapsed;
-            t.Start();
-
-        }
-
-        private void T_Elapsed(object sender, ElapsedEventArgs e)
-        {
-
-           // MainWindow = _capture.QueryFrame();
         }
 
         #endregion
@@ -118,9 +101,6 @@ namespace Turret.ViewModels
         }
         private void OnExitApp()
         {
-            _capture.Stop();
-            _capture.Dispose();
-            t.Dispose();
             System.Windows.Application.Current.MainWindow.Close();
         }
         #endregion
